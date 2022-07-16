@@ -9,9 +9,9 @@
 
 ## Документы:
 
-- План автоматизации (Plan.md)
-- Отчёт о проведённом тестировании (Report.md)
-- Отчёт о проведённой автоматизации (Summary.md)
+- План автоматизации ([Plan.md](https://github.com/Ekaterina-Isabel/Diploma/blob/master/Plan.md))
+- Отчёт о проведённом тестировании ([Report.md](https://github.com/Ekaterina-Isabel/Diploma/blob/master/Report.md))
+- Отчёт о проведённой автоматизации ([Summary.md](https://github.com/Ekaterina-Isabel/Diploma/blob/master/Summary.md))
 
 ## Предустановленное ПО:
 
