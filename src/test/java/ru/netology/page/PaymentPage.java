@@ -16,7 +16,6 @@ public class PaymentPage {
     private final SelenideElement yearField = $(".input [placeholder='22']");
     private final SelenideElement ownerField = $(byText("Владелец")).parent().$(".input__control");
     private final SelenideElement cvc_cvvField = $(".input [placeholder='999']");
-    private final SelenideElement header = $(".heading.heading_size_m.heading_theme_alfa-on-white");
     private final SelenideElement continueButton = $(byText("Продолжить"));
 
     private final SelenideElement notification = $("div.notification_visible  div.notification__content");

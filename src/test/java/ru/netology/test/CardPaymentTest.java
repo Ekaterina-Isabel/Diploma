@@ -20,7 +20,7 @@ public class CardPaymentTest {
         paymentPage = new PaymentPage();
     }
 
-    @DisplayName("Payment for the tour by card, card with the status \"APPROVED\"")
+    @DisplayName("1.1. Payment for the tour by card, card with the status \"APPROVED\"")
     @Test
     void shouldApproveBuyingTourCardApproved() {
         paymentPage.openCardPaymentPage();
@@ -30,7 +30,17 @@ public class CardPaymentTest {
         paymentPage.shouldHaveSuccessNotification();
     }
 
-    @DisplayName("Payment for the tour by card, card with the status \"DECLINED\"")
+    @DisplayName("1.1. Payment for the tour by credit card, card with the status \"APPROVED\"")
+    @Test
+    void shouldApproveBuyingTourCreditCardApproved() {
+        paymentPage.openCreditCardPaymentPage();
+        paymentPage.fillCardNumberField(cardNumberApproved);
+        fillOtherFieldsByValidInfo();
+
+        paymentPage.shouldHaveSuccessNotification();
+    }
+
+    @DisplayName("1.2. Payment for the tour by card, card with the status \"DECLINED\"")
     @Test
     void shouldDeclinedBuyingTourCardDeclined() {
         paymentPage.openCardPaymentPage();
@@ -40,7 +50,17 @@ public class CardPaymentTest {
         paymentPage.shouldHaveErrorNotification();
     }
 
-    @DisplayName("Payment for the tour by card, valid card number")
+    @DisplayName("1.2. Payment for the tour by credit card, card with the status \"DECLINED\"")
+    @Test
+    void shouldDeclinedBuyingTourCreditCardDeclined() {
+        paymentPage.openCreditCardPaymentPage();
+        paymentPage.fillCardNumberField(cardNumberDeclined);
+        fillOtherFieldsByValidInfo();
+
+        paymentPage.shouldHaveErrorNotification();
+    }
+
+    @DisplayName("1.3. Payment for the tour by card, valid card number, boundary values of input fields \"Month\" and \"Year\"")
     @Test
     void shouldDeclinedBuyingTourValidCardNumber() {
         paymentPage.openCardPaymentPage();
@@ -50,11 +70,21 @@ public class CardPaymentTest {
         paymentPage.shouldHaveErrorNotification();
     }
 
+    @DisplayName("1.3. Payment for the tour by credit card, valid card number, boundary values of input fields \"Month\" and \"Year\"")
+    @Test
+    void shouldDeclinedBuyingTourValidCreditCardNumber() {
+        paymentPage.openCreditCardPaymentPage();
+        paymentPage.fillCardNumberField(DataHelper.getCardNumberSign16());
+        fillOtherFieldsByValidInfo();
+
+        paymentPage.shouldHaveErrorNotification();
+    }
+
     private void fillOtherFieldsByValidInfo() {
-        paymentPage.fillMonthField(DataHelper.getCurrentMonth());
-        paymentPage.fillYear(DataHelper.getYear(0));
-        paymentPage.fillOwner(DataHelper.getOwner());
-        paymentPage.fillCvc_cvvField(DataHelper.getCVC_CVV());
+        paymentPage.fillMonthField(DataHelper.getCurrentMonth());       //текущий месяц
+        paymentPage.fillYearField(DataHelper.getYear(0));        //текущий год
+        paymentPage.fillOwnerField(DataHelper.getOwnerFullNameEn());
+        paymentPage.fillCvcCvvField(DataHelper.getCVC_CVV());
         paymentPage.clickContinueButton();
     }
 }
