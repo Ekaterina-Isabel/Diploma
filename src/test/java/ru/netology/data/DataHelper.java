@@ -11,10 +11,15 @@ public class DataHelper {
     public static final String cardNumberDeclined = "4444 4444 4444 4442";
     public static final String cardNumberAll0 = "0000 0000 0000 0000";
     public static final String cardNumberInvalid = "card!#$%&‘*+—/=?";
-    //    public static final String correctMonth = "08";
-    public static final String correctYear = "22";
-    public static final String correctOwner = "Петров";
-    public static final String correctCVC_CVV = "999";
+    public static final String monthAndYearNumbersIsAll0 = "00";
+    public static final String nonExistentMonthNumber = "13";
+    public static final String monthNumberInvalid = "y%";
+    public static final String longMonthNumber = "011";
+    public static final String yearNumberInvalid = "(U";
+    public static final String ownerInvalid = "00()№%__9";
+    public static final String cvcCvvIsAll0 = "000";
+    public static final String cvcCvvInvalid = "y%_";
+    public static final String longCvcCvvNumber = "1234";
     public static final String dbUrl = "jdbc:mysql://localhost:3306/app";
     public static final String user = "app";
     public static final String password = "pass";
@@ -39,30 +44,51 @@ public class DataHelper {
         return month;
     }
 
-    public static String getYear(int shiftYears) {
-        String year = LocalDate.now().format(DateTimeFormatter.ofPattern("yy"));
-
-        if (shiftYears < 0) {
-            LocalDate.now().minusYears(shiftYears).format(DateTimeFormatter.ofPattern("yy"));
-        } else {
-            LocalDate.now().plusYears(shiftYears).format(DateTimeFormatter.ofPattern("yy"));
-        }
-        return year;
+    public static String getOneNumber() {
+        Faker faker = new Faker();
+        return faker.number().digits(1);
     }
 
-    public static String getOwner() {
+    public static String getTwoNumber() {
+        Faker faker = new Faker();
+        return faker.number().digits(2);
+    }
+
+    public static String getYear(int shiftYears) {
+        return LocalDate.now().plusYears(shiftYears).format(DateTimeFormatter.ofPattern("yy"));
+    }
+
+    public static String getFullYearNumber(int shiftYears) {
+        return LocalDate.now().plusYears(shiftYears).format(DateTimeFormatter.ofPattern("yyyy"));
+    }
+
+    public static String getOwnerFullNameEn() {
         Faker faker = new Faker(new Locale("en"));
         return faker.name().fullName();
+    }
+
+    public static String getOwnerLastNameEn() {
+        Faker faker = new Faker(new Locale("en"));
+        return faker.name().lastName();
+    }
+
+    public static String getOwnerFirstNameEn() {
+        Faker faker = new Faker(new Locale("en"));
+        return faker.name().firstName();
+    }
+
+    public static String getOwnerLastNameRu() {
+        Faker faker = new Faker(new Locale("ru"));
+        return faker.name().lastName();
+    }
+
+    public static String getOwnerFirstNameRu() {
+        Faker faker = new Faker(new Locale("en"));
+        return faker.name().firstName();
     }
 
     public static String getCVC_CVV() {
         Faker faker = new Faker();
         return faker.number().digits(3);
     }
-
-
-//    public static String getDate(String locale) {
-//        Faker faker = new Faker(new Locale(locale));
-//        return faker.date().;
-//    }
 }

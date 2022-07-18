@@ -20,6 +20,10 @@ public class PaymentPage {
     private final SelenideElement continueButton = $(byText("Продолжить"));
 
     private final SelenideElement notification = $("div.notification_visible  div.notification__content");
+    private final SelenideElement wrongFormat = $(byText("Неверный формат"));
+    private final SelenideElement invalidCard = $(byText("Неверно указан срок действия карты"));
+    private final SelenideElement cardExpired = $(byText("Истёк срок действия карты"));
+    private final SelenideElement requiredField = $(byText("Поле обязательно для заполнения"));
 
     public void openCardPaymentPage() {
         buyButton.click();
@@ -37,16 +41,16 @@ public class PaymentPage {
         monthField.setValue(month);
     }
 
-    public void fillYear(String year) {
+    public void fillYearField(String year) {
         yearField.setValue(year);
     }
 
-    public void fillOwner(String cvc_cvv) {
-        ownerField.setValue(cvc_cvv);
+    public void fillOwnerField(String owner) {
+        ownerField.setValue(owner);
     }
 
-    public void fillCvc_cvvField(String owner) {
-        cvc_cvvField.setValue(owner);
+    public void fillCvcCvvField(String cvc_cvv) {
+        cvc_cvvField.setValue(cvc_cvv);
     }
 
     public void clickContinueButton() {
@@ -59,5 +63,21 @@ public class PaymentPage {
 
     public void shouldHaveErrorNotification() {
         notification.shouldHave(Condition.text("Ошибка! Банк отказал в проведении операции."), Duration.ofSeconds(15));
+    }
+
+    public void shouldHaveErrorNotificationWrongFormat() {
+        wrongFormat.shouldHave(Condition.text("Неверный формат"));
+    }
+
+    public void shouldHaveErrorNotificationInvalidCard() {
+        invalidCard.shouldHave(Condition.text("Неверно указан срок действия карты"));
+    }
+
+    public void shouldHaveErrorNotificationCardExpired() {
+        cardExpired.shouldHave(Condition.text("Истёк срок действия карты"));
+    }
+
+    public void shouldHaveErrorNotificationRequiredField() {
+        requiredField.shouldHave(Condition.text("Поле обязательно для заполнения"));
     }
 }
