@@ -28,6 +28,3 @@
 5. Для запуска симулятора банковских сервисов перейти в каталог `gate-simulator` и выполнить в терминале
    команду `npm start`
 6. Запустить автотесты
-
-Ярлык проверки сборки приложения:
-[![Build status](https://ci.appveyor.com/api/projects/status/uaeifsae8kc9qw2o?svg=true)](https://ci.appveyor.com/project/Ekaterina-Isabel/diploma)
