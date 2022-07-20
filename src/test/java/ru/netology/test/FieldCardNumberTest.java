@@ -1,14 +1,18 @@
 package ru.netology.test;
 
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import ru.netology.data.DataHelper;
+import ru.netology.data.SqlDataProvider;
 import ru.netology.page.PaymentPage;
 
 import static com.codeborne.selenide.Selenide.open;
+import static org.junit.jupiter.api.Assertions.assertNull;
 import static ru.netology.data.DataHelper.cardNumberAll0;
 import static ru.netology.data.DataHelper.cardNumberInvalid;
+import static ru.netology.data.SqlDataProvider.clearTables;
 
 public class FieldCardNumberTest {
 
@@ -20,7 +24,12 @@ public class FieldCardNumberTest {
         paymentPage = new PaymentPage();
     }
 
-    @DisplayName("2.1. Payment for the tour by card, short card number")
+    @AfterEach
+    public void cleanTables() {
+        clearTables();
+    }
+
+    @DisplayName("1.2.1. Payment for the tour by debit card, short card number")
     @Test
     void shouldNotSubmitApplicationWrongFormatShortCardNumber() {
         paymentPage.openCardPaymentPage();
@@ -28,9 +37,10 @@ public class FieldCardNumberTest {
         fillOtherFieldsByValidInfo();
 
         paymentPage.shouldHaveErrorNotificationWrongFormat();
+        assertNull(new SqlDataProvider().getPaymentStatus());
     }
 
-    @DisplayName("2.1. Payment for the tour by credit card, short card number")
+    @DisplayName("2.2.1. Payment for the tour by credit card, short card number")
     @Test
     void shouldNotSubmitApplicationWrongFormatShortCreditCardNumber() {
         paymentPage.openCreditCardPaymentPage();
@@ -38,9 +48,10 @@ public class FieldCardNumberTest {
         fillOtherFieldsByValidInfo();
 
         paymentPage.shouldHaveErrorNotificationWrongFormat();
+        assertNull(new SqlDataProvider().getCreditRequestStatus());
     }
 
-    @DisplayName("2.2. Payment for the tour by card, empty card number input")
+    @DisplayName("1.2.2. Payment for the tour by debit card, empty card number input")
     @Test
     void shouldNotSubmitApplicationEmptyInput() {
         paymentPage.openCardPaymentPage();
@@ -48,9 +59,10 @@ public class FieldCardNumberTest {
         fillOtherFieldsByValidInfo();
 
         paymentPage.shouldHaveErrorNotificationWrongFormat();
+        assertNull(new SqlDataProvider().getPaymentStatus());
     }
 
-    @DisplayName("2.2. Payment for the tour by credit card, empty card number input")
+    @DisplayName("2.2.2. Payment for the tour by credit card, empty card number input")
     @Test
     void shouldNotSubmitApplicationCreditCardEmptyInput() {
         paymentPage.openCreditCardPaymentPage();
@@ -58,9 +70,10 @@ public class FieldCardNumberTest {
         fillOtherFieldsByValidInfo();
 
         paymentPage.shouldHaveErrorNotificationWrongFormat();
+        assertNull(new SqlDataProvider().getCreditRequestStatus());
     }
 
-    @DisplayName("2.3. Payment for the tour by card, long card number")
+    @DisplayName("1.2.3. Payment for the tour by debit card, long card number")
     @Test
     void shouldNotSubmitApplicationLongCardNumber() {
         paymentPage.openCardPaymentPage();
@@ -68,9 +81,10 @@ public class FieldCardNumberTest {
         fillOtherFieldsByValidInfo();
 
         paymentPage.shouldHaveErrorNotification();
+        assertNull(new SqlDataProvider().getPaymentStatus());
     }
 
-    @DisplayName("2.3. Payment for the tour by credit card, long card number")
+    @DisplayName("2.2.3. Payment for the tour by credit card, long card number")
     @Test
     void shouldNotSubmitApplicationLongCreditCardNumber() {
         paymentPage.openCreditCardPaymentPage();
@@ -78,9 +92,10 @@ public class FieldCardNumberTest {
         fillOtherFieldsByValidInfo();
 
         paymentPage.shouldHaveErrorNotification();
+        assertNull(new SqlDataProvider().getCreditRequestStatus());
     }
 
-    @DisplayName("2.4. Payment for the tour by card, card number is all 0")
+    @DisplayName("1.2.4. Payment for the tour by debit card, card number is all 0")
     @Test
     void shouldNotSubmitApplicationCardAll0() {
         paymentPage.openCardPaymentPage();
@@ -88,9 +103,10 @@ public class FieldCardNumberTest {
         fillOtherFieldsByValidInfo();
 
         paymentPage.shouldHaveErrorNotificationWrongFormat();
+        assertNull(new SqlDataProvider().getPaymentStatus());
     }
 
-    @DisplayName("2.4. Payment for the tour by credit card, card number is all 0")
+    @DisplayName("2.2.4. Payment for the tour by credit card, card number is all 0")
     @Test
     void shouldNotSubmitApplicationCreditCardAll0() {
         paymentPage.openCreditCardPaymentPage();
@@ -98,9 +114,10 @@ public class FieldCardNumberTest {
         fillOtherFieldsByValidInfo();
 
         paymentPage.shouldHaveErrorNotificationWrongFormat();
+        assertNull(new SqlDataProvider().getCreditRequestStatus());
     }
 
-    @DisplayName("2.5. Payment for the tour by card, invalid card number")
+    @DisplayName("1.2.5. Payment for the tour by debit card, invalid card number")
     @Test
     void shouldNotSubmitApplicationInvalidCardNumber() {
         paymentPage.openCardPaymentPage();
@@ -108,9 +125,10 @@ public class FieldCardNumberTest {
         fillOtherFieldsByValidInfo();
 
         paymentPage.shouldHaveErrorNotificationWrongFormat();
+        assertNull(new SqlDataProvider().getPaymentStatus());
     }
 
-    @DisplayName("2.5. Payment for the tour by credit card, invalid card number")
+    @DisplayName("2.2.5. Payment for the tour by credit card, invalid card number")
     @Test
     void shouldNotSubmitApplicationInvalidCreditCardNumber() {
         paymentPage.openCreditCardPaymentPage();
@@ -118,6 +136,7 @@ public class FieldCardNumberTest {
         fillOtherFieldsByValidInfo();
 
         paymentPage.shouldHaveErrorNotificationWrongFormat();
+        assertNull(new SqlDataProvider().getCreditRequestStatus());
     }
 
     private void fillOtherFieldsByValidInfo() {

@@ -1,13 +1,17 @@
 package ru.netology.test;
 
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import ru.netology.data.DataHelper;
+import ru.netology.data.SqlDataProvider;
 import ru.netology.page.PaymentPage;
 
 import static com.codeborne.selenide.Selenide.open;
+import static org.junit.jupiter.api.Assertions.assertNull;
 import static ru.netology.data.DataHelper.*;
+import static ru.netology.data.SqlDataProvider.clearTables;
 
 public class FieldCvcCvvTest {
 
@@ -19,7 +23,12 @@ public class FieldCvcCvvTest {
         paymentPage = new PaymentPage();
     }
 
-    @DisplayName("6.1. Payment for the tour by card, one number for CVC/CVV")
+    @AfterEach
+    public void cleanTables() {
+        clearTables();
+    }
+
+    @DisplayName("1.6.1. Payment for the tour by debit card, one number for CVC/CVV")
     @Test
     void shouldNotSubmitApplicationWrongFormatOneNumberForCvcCvv() {
         paymentPage.openCardPaymentPage();
@@ -27,9 +36,10 @@ public class FieldCvcCvvTest {
         fillOtherFieldsByValidInfo();
 
         paymentPage.shouldHaveErrorNotificationWrongFormat();
+        assertNull(new SqlDataProvider().getPaymentStatus());
     }
 
-    @DisplayName("6.1. Payment for the tour by credit card, one number for CVC/CVV")
+    @DisplayName("2.6.1. Payment for the tour by credit card, one number for CVC/CVV")
     @Test
     void shouldNotSubmitApplicationCreditCardWrongFormatOneNumberForCvcCvv() {
         paymentPage.openCreditCardPaymentPage();
@@ -37,9 +47,10 @@ public class FieldCvcCvvTest {
         fillOtherFieldsByValidInfo();
 
         paymentPage.shouldHaveErrorNotificationWrongFormat();
+        assertNull(new SqlDataProvider().getCreditRequestStatus());
     }
 
-    @DisplayName("6.2. Payment for the tour by card, two numbers for CVC/CVV")
+    @DisplayName("1.6.2. Payment for the tour by debit card, two numbers for CVC/CVV")
     @Test
     void shouldNotSubmitApplicationWrongFormatTwoNumberForCvcCvv() {
         paymentPage.openCardPaymentPage();
@@ -47,9 +58,10 @@ public class FieldCvcCvvTest {
         fillOtherFieldsByValidInfo();
 
         paymentPage.shouldHaveErrorNotificationWrongFormat();
+        assertNull(new SqlDataProvider().getPaymentStatus());
     }
 
-    @DisplayName("6.2. Payment for the tour by credit card, two numbers for CVC/CVV")
+    @DisplayName("2.6.2. Payment for the tour by credit card, two numbers for CVC/CVV")
     @Test
     void shouldNotSubmitApplicationCreditCardWrongFormatTwoNumberForCvcCvv() {
         paymentPage.openCreditCardPaymentPage();
@@ -57,9 +69,10 @@ public class FieldCvcCvvTest {
         fillOtherFieldsByValidInfo();
 
         paymentPage.shouldHaveErrorNotificationWrongFormat();
+        assertNull(new SqlDataProvider().getCreditRequestStatus());
     }
 
-    @DisplayName("6.3. Payment for the tour by card, empty CVC/CVV number input")
+    @DisplayName("1.6.3. Payment for the tour by debit card, empty CVC/CVV number input")
     @Test
     void shouldNotSubmitApplicationEmptyInput() {
         paymentPage.openCardPaymentPage();
@@ -67,9 +80,10 @@ public class FieldCvcCvvTest {
         fillOtherFieldsByValidInfo();
 
         paymentPage.shouldHaveErrorNotificationWrongFormat();
+        assertNull(new SqlDataProvider().getPaymentStatus());
     }
 
-    @DisplayName("6.3. Payment for the tour by credit card, empty CVC/CVV number input")
+    @DisplayName("2.6.3. Payment for the tour by credit card, empty CVC/CVV number input")
     @Test
     void shouldNotSubmitApplicationCreditCardEmptyInput() {
         paymentPage.openCreditCardPaymentPage();
@@ -77,9 +91,10 @@ public class FieldCvcCvvTest {
         fillOtherFieldsByValidInfo();
 
         paymentPage.shouldHaveErrorNotificationWrongFormat();
+        assertNull(new SqlDataProvider().getCreditRequestStatus());
     }
 
-    @DisplayName("6.4. Payment for the tour by card, CVC/CVV number is all 0")
+    @DisplayName("1.6.4. Payment for the tour by debit card, CVC/CVV number is all 0")
     @Test
     void shouldNotSubmitApplicationCvcCvvAll0() {
         paymentPage.openCardPaymentPage();
@@ -87,9 +102,10 @@ public class FieldCvcCvvTest {
         fillOtherFieldsByValidInfo();
 
         paymentPage.shouldHaveErrorNotificationWrongFormat();
+        assertNull(new SqlDataProvider().getPaymentStatus());
     }
 
-    @DisplayName("6.4. Payment for the tour by credit card, CVC/CVV number is all 0")
+    @DisplayName("2.6.4. Payment for the tour by credit card, CVC/CVV number is all 0")
     @Test
     void shouldNotSubmitApplicationCreditCardCvcCvvAll0() {
         paymentPage.openCreditCardPaymentPage();
@@ -97,9 +113,10 @@ public class FieldCvcCvvTest {
         fillOtherFieldsByValidInfo();
 
         paymentPage.shouldHaveErrorNotificationWrongFormat();
+        assertNull(new SqlDataProvider().getCreditRequestStatus());
     }
 
-    @DisplayName("6.5. Payment for the tour by card, invalid CVC/CVV number")
+    @DisplayName("1.6.5. Payment for the tour by debit card, invalid CVC/CVV number")
     @Test
     void shouldNotSubmitApplicationInvalidCvcCvvNumber() {
         paymentPage.openCardPaymentPage();
@@ -107,9 +124,10 @@ public class FieldCvcCvvTest {
         fillOtherFieldsByValidInfo();
 
         paymentPage.shouldHaveErrorNotificationWrongFormat();
+        assertNull(new SqlDataProvider().getPaymentStatus());
     }
 
-    @DisplayName("6.5. Payment for the tour by credit card, invalid CVC/CVV number")
+    @DisplayName("2.6.5. Payment for the tour by credit card, invalid CVC/CVV number")
     @Test
     void shouldNotSubmitApplicationCreditCardInvalidCvcCvvNumber() {
         paymentPage.openCreditCardPaymentPage();
@@ -117,9 +135,10 @@ public class FieldCvcCvvTest {
         fillOtherFieldsByValidInfo();
 
         paymentPage.shouldHaveErrorNotificationWrongFormat();
+        assertNull(new SqlDataProvider().getCreditRequestStatus());
     }
 
-    @DisplayName("6.6. Payment for the tour by card, long CVC/CVV number")
+    @DisplayName("1.6.6. Payment for the tour by debit card, long CVC/CVV number")
     @Test
     void shouldNotSubmitApplicationLongCvcCvvNumber() {
         paymentPage.openCardPaymentPage();
@@ -127,9 +146,10 @@ public class FieldCvcCvvTest {
         fillOtherFieldsByValidInfo();
 
         paymentPage.shouldHaveErrorNotification();
+        assertNull(new SqlDataProvider().getPaymentStatus());
     }
 
-    @DisplayName("6.6. Payment for the tour by credit card, long CVC/CVV number")
+    @DisplayName("2.6.6. Payment for the tour by credit card, long CVC/CVV number")
     @Test
     void shouldNotSubmitApplicationCreditCardLongCvcCvvNumber() {
         paymentPage.openCreditCardPaymentPage();
@@ -137,6 +157,7 @@ public class FieldCvcCvvTest {
         fillOtherFieldsByValidInfo();
 
         paymentPage.shouldHaveErrorNotification();
+        assertNull(new SqlDataProvider().getCreditRequestStatus());
     }
 
     private void fillOtherFieldsByValidInfo() {

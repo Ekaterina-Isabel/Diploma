@@ -1,13 +1,17 @@
 package ru.netology.test;
 
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import ru.netology.data.DataHelper;
+import ru.netology.data.SqlDataProvider;
 import ru.netology.page.PaymentPage;
 
 import static com.codeborne.selenide.Selenide.open;
+import static org.junit.jupiter.api.Assertions.assertNull;
 import static ru.netology.data.DataHelper.ownerInvalid;
+import static ru.netology.data.SqlDataProvider.clearTables;
 
 public class FieldOwnerTest {
 
@@ -19,7 +23,12 @@ public class FieldOwnerTest {
         paymentPage = new PaymentPage();
     }
 
-    @DisplayName("5.1. Payment for the tour by card, only last name in Latin letters")
+    @AfterEach
+    public void cleanTables() {
+        clearTables();
+    }
+
+    @DisplayName("1.5.1. Payment for the tour by debit card, only last name in Latin letters")
     @Test
     void shouldNotSubmitApplicationWrongFormatLastNameInLatinLetters() {
         paymentPage.openCardPaymentPage();
@@ -27,9 +36,10 @@ public class FieldOwnerTest {
         fillOtherFieldsByValidInfo();
 
         paymentPage.shouldHaveErrorNotificationWrongFormat();
+        assertNull(new SqlDataProvider().getPaymentStatus());
     }
 
-    @DisplayName("5.1. Payment for the tour by credit card, only last name in Latin letters")
+    @DisplayName("2.5.1. Payment for the tour by credit card, only last name in Latin letters")
     @Test
     void shouldNotSubmitApplicationCreditCardWrongFormatLastNameInLatinLetters() {
         paymentPage.openCreditCardPaymentPage();
@@ -37,9 +47,10 @@ public class FieldOwnerTest {
         fillOtherFieldsByValidInfo();
 
         paymentPage.shouldHaveErrorNotificationWrongFormat();
+        assertNull(new SqlDataProvider().getCreditRequestStatus());
     }
 
-    @DisplayName("5.2. Payment for the tour by card, only first name in Latin letters")
+    @DisplayName("1.5.2. Payment for the tour by debit card, only first name in Latin letters")
     @Test
     void shouldNotSubmitApplicationWrongFormatFirstNameInLatinLetters() {
         paymentPage.openCardPaymentPage();
@@ -47,9 +58,10 @@ public class FieldOwnerTest {
         fillOtherFieldsByValidInfo();
 
         paymentPage.shouldHaveErrorNotificationWrongFormat();
+        assertNull(new SqlDataProvider().getPaymentStatus());
     }
 
-    @DisplayName("5.2. Payment for the tour by credit card, only first name in Latin letters")
+    @DisplayName("2.5.2. Payment for the tour by credit card, only first name in Latin letters")
     @Test
     void shouldNotSubmitApplicationCreditCardWrongFormatFirstNameInLatinLetters() {
         paymentPage.openCreditCardPaymentPage();
@@ -57,9 +69,10 @@ public class FieldOwnerTest {
         fillOtherFieldsByValidInfo();
 
         paymentPage.shouldHaveErrorNotificationWrongFormat();
+        assertNull(new SqlDataProvider().getCreditRequestStatus());
     }
 
-    @DisplayName("5.3. Payment for the tour by card, only last name in Cyrillic")
+    @DisplayName("1.5.3. Payment for the tour by debit card, only last name in Cyrillic")
     @Test
     void shouldNotSubmitApplicationWrongFormatLastNameInCyrillic() {
         paymentPage.openCardPaymentPage();
@@ -67,9 +80,10 @@ public class FieldOwnerTest {
         fillOtherFieldsByValidInfo();
 
         paymentPage.shouldHaveErrorNotificationWrongFormat();
+        assertNull(new SqlDataProvider().getPaymentStatus());
     }
 
-    @DisplayName("5.3. Payment for the tour by credit card, only last name in Cyrillic")
+    @DisplayName("2.5.3. Payment for the tour by credit card, only last name in Cyrillic")
     @Test
     void shouldNotSubmitApplicationCreditCardWrongFormatLastNameInCyrillic() {
         paymentPage.openCreditCardPaymentPage();
@@ -77,9 +91,10 @@ public class FieldOwnerTest {
         fillOtherFieldsByValidInfo();
 
         paymentPage.shouldHaveErrorNotificationWrongFormat();
+        assertNull(new SqlDataProvider().getCreditRequestStatus());
     }
 
-    @DisplayName("5.4. Payment for the tour by card, only first name in Cyrillic")
+    @DisplayName("1.5.4. Payment for the tour by debit card, only first name in Cyrillic")
     @Test
     void shouldNotSubmitApplicationWrongFormatFirstNameCyrillic() {
         paymentPage.openCardPaymentPage();
@@ -87,9 +102,10 @@ public class FieldOwnerTest {
         fillOtherFieldsByValidInfo();
 
         paymentPage.shouldHaveErrorNotificationWrongFormat();
+        assertNull(new SqlDataProvider().getPaymentStatus());
     }
 
-    @DisplayName("5.4. Payment for the tour by credit card, only first name in Cyrillic")
+    @DisplayName("2.5.4. Payment for the tour by credit card, only first name in Cyrillic")
     @Test
     void shouldNotSubmitApplicationCreditCardWrongFormatFirstNameCyrillic() {
         paymentPage.openCreditCardPaymentPage();
@@ -97,9 +113,10 @@ public class FieldOwnerTest {
         fillOtherFieldsByValidInfo();
 
         paymentPage.shouldHaveErrorNotificationWrongFormat();
+        assertNull(new SqlDataProvider().getCreditRequestStatus());
     }
 
-    @DisplayName("5.5. Payment for the tour by card, empty owner input")
+    @DisplayName("1.5.5. Payment for the tour by debit card, empty owner input")
     @Test
     void shouldNotSubmitApplicationEmptyInput() {
         paymentPage.openCardPaymentPage();
@@ -107,9 +124,10 @@ public class FieldOwnerTest {
         fillOtherFieldsByValidInfo();
 
         paymentPage.shouldHaveErrorNotificationRequiredField();
+        assertNull(new SqlDataProvider().getPaymentStatus());
     }
 
-    @DisplayName("5.5. Payment for the tour by credit card, empty owner input")
+    @DisplayName("2.5.5. Payment for the tour by credit card, empty owner input")
     @Test
     void shouldNotSubmitApplicationCreditCardEmptyInput() {
         paymentPage.openCreditCardPaymentPage();
@@ -117,9 +135,10 @@ public class FieldOwnerTest {
         fillOtherFieldsByValidInfo();
 
         paymentPage.shouldHaveErrorNotificationRequiredField();
+        assertNull(new SqlDataProvider().getCreditRequestStatus());
     }
 
-    @DisplayName("5.6. Payment for the tour by card, invalid owner")
+    @DisplayName("1.5.6. Payment for the tour by debit card, invalid owner")
     @Test
     void shouldNotSubmitApplicationInvalidOwner() {
         paymentPage.openCardPaymentPage();
@@ -127,9 +146,10 @@ public class FieldOwnerTest {
         fillOtherFieldsByValidInfo();
 
         paymentPage.shouldHaveErrorNotificationWrongFormat();
+        assertNull(new SqlDataProvider().getPaymentStatus());
     }
 
-    @DisplayName("5.6. Payment for the tour by credit card, invalid owner")
+    @DisplayName("2.5.6. Payment for the tour by credit card, invalid owner")
     @Test
     void shouldNotSubmitApplicationCreditCardInvalidCardOwner() {
         paymentPage.openCreditCardPaymentPage();
@@ -137,6 +157,7 @@ public class FieldOwnerTest {
         fillOtherFieldsByValidInfo();
 
         paymentPage.shouldHaveErrorNotificationWrongFormat();
+        assertNull(new SqlDataProvider().getCreditRequestStatus());
     }
 
     private void fillOtherFieldsByValidInfo() {

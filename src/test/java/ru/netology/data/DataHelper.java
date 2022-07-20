@@ -20,9 +20,6 @@ public class DataHelper {
     public static final String cvcCvvIsAll0 = "000";
     public static final String cvcCvvInvalid = "y%_";
     public static final String longCvcCvvNumber = "1234";
-    public static final String dbUrl = "jdbc:mysql://localhost:3306/app";
-    public static final String user = "app";
-    public static final String password = "pass";
 
     public static String getCardNumberSign15() {
         Faker faker = new Faker();

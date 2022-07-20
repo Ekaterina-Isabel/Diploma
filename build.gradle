@@ -20,8 +20,10 @@ dependencies {
     testImplementation 'org.junit.jupiter:junit-jupiter:5.7.0'
     testImplementation 'com.codeborne:selenide:5.19.0'
     testImplementation 'com.github.javafaker:javafaker:1.0.2'
+    testImplementation 'mysql:mysql-connector-java:8.0.29'
     testImplementation 'io.rest-assured:rest-assured:4.3.3'
     implementation 'com.github.javafaker:javafaker:1.0.2'       //подключение faker
+    testImplementation 'commons-dbutils:commons-dbutils:1.7'
     testImplementation 'org.slf4j:slf4j-simple:1.7.32'
 }
 
@@ -29,4 +31,7 @@ test {
     useJUnitPlatform()
     // в тестах, вызывая `gradlew test -Dselenide.headless=true` будем передавать этот параметр в JVM (где его подтянет Selenide)
     systemProperty 'selenide.headless', System.getProperty('selenide.headless')
+    systemProperty 'db.url', System.getProperty('db.url', 'jdbc:mysql://localhost:3306/app')
+    systemProperty 'db.user', System.getProperty('db.user', 'app')
+    systemProperty 'db.pass', System.getProperty('db.pass', 'pass')
 }
