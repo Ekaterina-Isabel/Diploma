@@ -1,5 +1,6 @@
 plugins {
     id 'java'
+    id 'io.qameta.allure' version '2.9.6'       //плагин для интеграции Allure с проектом
 }
 
 group 'ru.netology'
@@ -10,6 +11,14 @@ sourceCompatibility = 11
 // кодировка файлов (если используете русский язык в файлах)
 compileJava.options.encoding = "UTF-8"
 compileTestJava.options.encoding = "UTF-8"
+
+//секция для настройки allure
+allure {
+    version = '2.16.1'
+    useJUnit5 {
+        version = '2.16.1'
+    }
+}
 
 repositories {
     mavenCentral()
@@ -23,6 +32,8 @@ dependencies {
     testImplementation 'mysql:mysql-connector-java:8.0.29'
     testImplementation 'io.rest-assured:rest-assured:4.3.3'
     implementation 'com.github.javafaker:javafaker:1.0.2'       //подключение faker
+    testImplementation 'io.qameta.allure:allure-selenide:2.16.1'
+    // зависимость для подключения интеграции с Selenide
     testImplementation 'commons-dbutils:commons-dbutils:1.7'
     testImplementation 'org.slf4j:slf4j-simple:1.7.32'
 }

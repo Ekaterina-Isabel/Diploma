@@ -1,9 +1,8 @@
 package ru.netology.test;
 
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
+import com.codeborne.selenide.logevents.SelenideLogger;
+import io.qameta.allure.selenide.AllureSelenide;
+import org.junit.jupiter.api.*;
 import ru.netology.data.DataHelper;
 import ru.netology.data.SqlDataProvider;
 import ru.netology.page.PaymentPage;
@@ -17,6 +16,16 @@ import static ru.netology.data.SqlDataProvider.clearTables;
 public class FieldCardNumberTest {
 
     private PaymentPage paymentPage;
+
+    @BeforeAll
+    static void setUpAll() {
+        SelenideLogger.addListener("allure", new AllureSelenide());
+    }
+
+    @AfterAll
+    static void tearDownAll() {
+        SelenideLogger.removeListener("allure");
+    }
 
     @BeforeEach
     void setup() {
