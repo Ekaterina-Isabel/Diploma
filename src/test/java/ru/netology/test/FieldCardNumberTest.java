@@ -67,7 +67,7 @@ public class FieldCardNumberTest {
         paymentPage.fillCardNumberField("");
         fillOtherFieldsByValidInfo();
 
-        paymentPage.shouldHaveErrorNotificationWrongFormat();
+        paymentPage.shouldHaveErrorNotificationRequiredField();
         assertNull(new SqlDataProvider().getPaymentStatus());
     }
 
@@ -78,7 +78,7 @@ public class FieldCardNumberTest {
         paymentPage.fillCardNumberField("");
         fillOtherFieldsByValidInfo();
 
-        paymentPage.shouldHaveErrorNotificationWrongFormat();
+        paymentPage.shouldHaveErrorNotificationRequiredField();
         assertNull(new SqlDataProvider().getCreditRequestStatus());
     }
 

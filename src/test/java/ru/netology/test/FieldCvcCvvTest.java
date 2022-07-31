@@ -88,7 +88,7 @@ public class FieldCvcCvvTest {
         paymentPage.fillCvcCvvField("");
         fillOtherFieldsByValidInfo();
 
-        paymentPage.shouldHaveErrorNotificationWrongFormat();
+        paymentPage.shouldHaveErrorNotificationRequiredField();
         assertNull(new SqlDataProvider().getPaymentStatus());
     }
 
@@ -99,7 +99,7 @@ public class FieldCvcCvvTest {
         paymentPage.fillCvcCvvField("");
         fillOtherFieldsByValidInfo();
 
-        paymentPage.shouldHaveErrorNotificationWrongFormat();
+        paymentPage.shouldHaveErrorNotificationRequiredField();
         assertNull(new SqlDataProvider().getCreditRequestStatus());
     }
 

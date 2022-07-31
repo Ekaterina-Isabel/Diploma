@@ -66,7 +66,7 @@ public class FieldYearTest {
         paymentPage.fillYearField("");
         fillOtherFieldsByValidInfo();
 
-        paymentPage.shouldHaveErrorNotificationWrongFormat();
+        paymentPage.shouldHaveErrorNotificationRequiredField();
         assertNull(new SqlDataProvider().getPaymentStatus());
     }
 
@@ -77,7 +77,7 @@ public class FieldYearTest {
         paymentPage.fillYearField("");
         fillOtherFieldsByValidInfo();
 
-        paymentPage.shouldHaveErrorNotificationWrongFormat();
+        paymentPage.shouldHaveErrorNotificationRequiredField();
         assertNull(new SqlDataProvider().getCreditRequestStatus());
     }
 
