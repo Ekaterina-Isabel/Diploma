@@ -10,7 +10,6 @@ import java.sql.SQLException;
 
 public class SqlDataProvider {
     private static final String user = "app";
-    private static final String userw = System.getenv("USERNAME");
     private static final String password = "pass";
 
     private final QueryRunner runner = new QueryRunner();
