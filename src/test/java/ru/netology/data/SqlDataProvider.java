@@ -30,7 +30,13 @@ public class SqlDataProvider {
         var clearOrderTableQuery = "DELETE FROM order_entity;";
         var clearPaymentTableQuery = "DELETE FROM payment_entity;";
 
-        try (var conn = DriverManager.getConnection(System.getProperty("db.url"), user, password)) {
+        try (
+                var conn = DriverManager.getConnection(
+                        System.getProperty("db.url"),
+                        System.getProperty("db.user"),
+                        System.getProperty("db.pass")
+                )
+        ) {
             runner.update(conn, clearCreditRequestTableQuery);
             runner.update(conn, clearOrderTableQuery);
             runner.update(conn, clearPaymentTableQuery);

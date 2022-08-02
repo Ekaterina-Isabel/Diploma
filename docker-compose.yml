@@ -1,3 +1,4 @@
+# для подключение mysql
 #version: '3.7'
 #services:
 #  mysql:
@@ -11,6 +12,7 @@
 #      - MYSQL_USER=app
 #      - MYSQL_PASSWORD=pass
 
+# для подключение postgresql
 version: '3.1'
 services:
   db:
