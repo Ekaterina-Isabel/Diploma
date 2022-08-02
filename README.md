@@ -22,7 +22,7 @@
 
 1. Запустить Docker
 2. Для копирования репозитория в терминале выполнить команду `git clone <ссылка на репозиторий>`
-3. Для того, что бы протестировать сервис на БД PostgreSQL или MySQL необходимо раскомментировать/закомментировать настройки для соотвтествующих БД в файлах [application.properties](https://github.com/Ekaterina-Isabel/Diploma/blob/master/application.properties) и [docker-compose.yml](https://github.com/Ekaterina-Isabel/Diploma/blob/master/docker-compose.yml)
+3. Для того, что бы протестировать сервис на БД PostgreSQL или MySQL необходимо раскомментировать/закомментировать настройки для соотвтествующих БД в файлах [application.properties](https://github.com/Ekaterina-Isabel/Diploma/blob/master/application.properties), [docker-compose.yml](https://github.com/Ekaterina-Isabel/Diploma/blob/master/docker-compose.yml) и в [build.gradle](https://github.com/Ekaterina-Isabel/Diploma/blob/master/build.gradle) в блоке `test`
 4. Для запуска контейнеров с БД в терминале выполнить команду `docker-compose up`
 5. Для запуска приложения в терминале выполнить команду `java -jar .\artifacts\aqa-shop.jar`. Приложение открывается на
    странице http://localhost:8080/
