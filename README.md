@@ -17,6 +17,14 @@
 
 - Intellij idea Ultimate Edition
 - Docker с предустановленным sql (https://hub.docker.com/_/mysql, https://hub.docker.com/_/postgres)
+- Node.js (https://nodejs.org/en)
+
+## Параметры окружения
+- java 17
+- JAVA_HOME v17
+- node.js v20.12.2
+- npm v10.5.0
+*примечание: если автотесты не запускаются (`./gradlew clean test allureReport`), то необходимо изменить версию библиотеки (`com.codeborne:selenide`) на более свежую
 
 ## Процедура запуска авто-тестов:
 
